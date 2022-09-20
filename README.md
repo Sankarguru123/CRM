@@ -1,7 +1,7 @@
 # CRM
 
 
-step1: cloned or download 
+step1: clone or download 
 
 step2: pip install -r requirements.txt
 
