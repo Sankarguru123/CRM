@@ -1,19 +1,17 @@
 from django.contrib import admin
-from django.urls import path
-# from .views import registerpage,loginpage,logoutuser
+from django.urls import path,include
 from . import views
+from rest_framework.routers import DefaultRouter
+from .views import ProductAPIView,ProductDetailAV,OrderDataVS
+
+router = DefaultRouter()
+router.register('order', OrderDataVS, basename='Order_details')
 
 urlpatterns = [
-    path('register/', views.registerPage, name="register"),
-    path('login/', views.loginPage, name="login"),
-    path('logout/', views.logoutUser, name="logout"),
+    path('product/', ProductAPIView.as_view(), name='product'),
+    path('product/<int:pk>', ProductDetailAV.as_view(), name='product-detail'),
+    path('', include(router.urls)),
 
-    path('', views.home, name="home"),
-    path('products/', views.products, name='products'),
-    path('customer/<str:pk_test>/', views.customer, name="customer"),
 
-    path('create_order/', views.createOrder, name="create_order"),
-    path('update_order/<str:pk>/', views.updateOrder, name="update_order"),
-    path('delete_order/<str:pk>/', views.deleteOrder, name="delete_order"),
 
 ]
